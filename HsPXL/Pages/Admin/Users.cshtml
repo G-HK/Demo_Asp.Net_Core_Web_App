@@ -1,0 +1,39 @@
+﻿@page
+@model HsPXL.Pages.Admin.UsersModel
+@{ Layout = "~/Views/Admin/_Layout.cshtml"; }
+
+
+<h3 class="bg-primary text-white text-center p-2">Admin User</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            @if (item.UserName != "Admin")
+            {
+                <tr>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td> @item.Email</td>
+                    <td>
+                        <a asp-page="./EditUser" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./DeleteUser" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

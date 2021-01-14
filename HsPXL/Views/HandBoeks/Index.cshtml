@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HsPXL.Models.HandBoek>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Afbeelding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KostPrijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UitgiftDatum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="@item.Afbeelding" alt="@item.Title"  style="height:150px; width:100px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <currency-helper Currency="@item.KostPrijs"></currency-helper>
+            </td>
+            <td>
+                @item.UitgiftDatum.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HandBoekID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HandBoekID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HandBoekID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

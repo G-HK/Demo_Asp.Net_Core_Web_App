@@ -1,0 +1,16 @@
+﻿@page
+@model HsPXL.Pages.User.unauthorizedUserModel
+@{
+    ViewData["Title"] = "Access Denied";
+
+}
+<META HTTP-EQUIV="Refresh" CONTENT="5;URL=@(Url.Action("Index", "Home"))">
+
+<div class="text-center">
+    <h1 class="alert-danger "> Access denied for user.</h1>
+    <h2>Unauthorized User</h2>
+    <img src="~/images/accessdenied.png" />
+</div>
+
+
+

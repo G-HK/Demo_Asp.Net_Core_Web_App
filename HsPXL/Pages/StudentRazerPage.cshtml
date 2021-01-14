@@ -1,0 +1,54 @@
+﻿@page
+@model HsPXL.Pages.StudentRazerPageModel
+
+@{
+    ViewData["Title"] = "StudentRazerPage";
+}
+
+<h1>StudentRazerPage</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Voornaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].CreationDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Student) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voornaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.StudentID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.StudentID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StudentID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

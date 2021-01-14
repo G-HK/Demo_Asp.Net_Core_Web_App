@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HsPXL.Models.Student>
+
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div>
+    <form asp-action="Index" method="get" class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+        @* type = name moet zelfde zijn als de variable   *@
+        <input class="form-control form-control-sm ml-3 w-50" name="name" type="text" placeholder="Search Is in Development"
+               aria-label="Search">
+        <button type="submit" class="input-group-text cyan lighten-2">
+            <i class="fas fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="card" style="margin-top:10px; margin-bottom:10px;">
+        <div class="card-body">
+            <h3 class="card-title">@Html.DisplayFor(modelItem => item.Naam)
+                        @Html.DisplayFor(modelItem => item.Voornaam)
+                    </h3>
+            <div class="card-body row">
+                <div>
+                    <h4>Student Info</h4>
+                    <span>
+                        StudentId: @Html.DisplayFor(modelItem => item.StudentID)
+                    </span><br />
+                    <span>
+                        Email: @Html.DisplayFor(modelItem => item.Email)
+                    </span><br />
+                    <span>
+                        CreationDate: @Html.DisplayFor(modelItem => item.CreationDate)
+                    </span>
+                </div>
+                <div>
+                    <h4>Cursusses</h4>
+                    <ul>
+                        @foreach (var inhg in item.Inschrijvings)
+                        {
+                            foreach (var itm in ViewData["Cursus"] as IEnumerable<Cursus>)
+                            {
+                                if (itm.CursusID == inhg.CursusID)
+                                {
+                                    <li>@itm.CursusName</li>
+
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+
+            <a  asp-action="Edit" asp-route-id="@item.StudentID">
+            <i class="fa fa-edit"></i>
+                </a>|
+            <a asp-action="Details" asp-route-id="@item.StudentID">
+                <i class="fa fa-info"></i>
+            </a>|
+            <a asp-action="Delete" asp-route-id="@item.StudentID">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+    </div>
+
+
+}
